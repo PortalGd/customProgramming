@@ -53,10 +53,11 @@ class TokenType:
     NEWLINE = 38
 
 class Token:
-    type: TokenType
-    value: str
-    line: int
-    col: int
+    def __init__(self, type, value, line, col):
+        self.type = type
+        self.value = value
+        self.line = line
+        self.col = col
 
     def __repr__(self):
         return f"Token({self.type}, {self.value}, {self.line}, {self.col})"
@@ -98,9 +99,10 @@ class Lexer:
                 self.col = 1
             else:
                 self.col += 1
+            self.pos += steps
 
     def skip_whitespace(self):
-        while self.current_char() and self.current_char() in '\t':
+        while self.current_char() and self.current_char() in ' \t':
             self.advance()
 
     def skip_comment(self):
@@ -219,12 +221,12 @@ class Lexer:
             single_char_tokens = {
                 '+': TokenType.PLUS,
                 '-': TokenType.MINUS,
-                '*': TokenType.STAR,
-                '/': TokenType.SLASH,
+                '*': TokenType.MULTIPLY,
+                '/': TokenType.DIVIDE,
                 '%': TokenType.PERCENT,
                 '=': TokenType.EQUAL,
-                '<': TokenType.LT,
-                '>': TokenType.GT,
+                '<': TokenType.LESS,
+                '>': TokenType.GREATER,
                 '!': TokenType.BANG,
                 '(': TokenType.LPAREN,
                 ')': TokenType.RPAREN,
@@ -252,31 +254,24 @@ def tokenize(code: str) -> list[Token]:
     return lexer.tokenize()
 
 if __name__ == "__main__":
-    # Test 1: Simple let binding
     code1 = "let x = 5;"
     print("Test 1:", code1)
     tokens1 = tokenize(code1)
     for token in tokens1:
         print(f"  {token}")
     print()
-    
-    # Test 2: Expression
     code2 = "x + 3 * 2"
     print("Test 2:", code2)
     tokens2 = tokenize(code2)
     for token in tokens2:
         print(f"  {token}")
     print()
-    
-    # Test 3: Function definition
     code3 = "fn add(a: int, b: int) -> int { a + b }"
     print("Test 3:", code3)
     tokens3 = tokenize(code3)
     for token in tokens3:
         print(f"  {token}")
     print()
-    
-    # Test 4: String literal
     code4 = 'let msg = "hello world";'
     print("Test 4:", code4)
     tokens4 = tokenize(code4)
