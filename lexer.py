@@ -1,56 +1,59 @@
 
+from enum import auto
+
+
 class TokenType:
 
     #literal types
-    INT=1
-    FLOAT = 2
-    STRING = 3
-    TRUE = 4
-    FALSE = 5
+    INT=auto()
+    FLOAT = auto()
+    STRING = auto()
+    TRUE = auto()
+    FALSE = auto()
 
 
     #keywords
-    LET = 6
-    FN = 7
-    IF = 8
-    ELSE = 9
-    RETURN =10
+    LET = auto()
+    FN = auto()
+    IF = auto()
+    ELSE = auto()
+    RETURN =auto()
 
     #identifiers
-    IDENTIFIER = 11
+    IDENTIFIER = auto()
 
     #operators
-    PLUS = 12
-    MINUS = 13
-    MULTIPLY = 14
-    DIVIDE = 15
-    PERCENT = 16
-    EQUAL = 17
-    EQUAL_EQUAL = 18
-    NOT_EQUAL = 19
-    LESS = 20
-    LESS_EQUAL = 21
-    GREATER = 22
-    GREATER_EQUAL = 23
-    AND_AND = 24
-    OR_OR = 25
-    BANG = 26
+    PLUS = auto()
+    MINUS = auto()
+    MULTIPLY = auto()
+    DIVIDE = auto()
+    PERCENT = auto()
+    EQUAL = auto()
+    EQUAL_EQUAL = auto()
+    NOT_EQUAL = auto()
+    LESS = auto()
+    LESS_EQUAL = auto()
+    GREATER = auto()
+    GREATER_EQUAL = auto()
+    AND_AND = auto()
+    OR_OR = auto()
+    BANG = auto()
 
     #delimiters
-    LPAREN = 27
-    RPAREN = 28
-    LBRACE = 29
-    RBRACE = 30
-    LBRACKET = 31
-    RBRACKET = 32
-    SEMICOLON = 33
-    COMMA = 34
-    COLON = 35
-    ARROW = 36
+    LPAREN = auto()
+    RPAREN = auto()
+    LBRACE = auto()
+    RBRACE = auto()
+    LBRACKET = auto()
+    RBRACKET = auto()
+    SEMICOLON = auto()
+    COMMA = auto()
+    COLON = auto()
+    ARROW = auto()
 
     #other
-    EOF = 37
-    NEWLINE = 38
+    EOF = auto()
+    NEWLINE = auto()
 
 class Token:
     def __init__(self, type, value, line, col):
@@ -277,5 +280,4 @@ if __name__ == "__main__":
     tokens4 = tokenize(code4)
     for token in tokens4:
         print(f"  {token}")
-
 
